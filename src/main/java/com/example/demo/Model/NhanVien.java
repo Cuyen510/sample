@@ -1,31 +1,43 @@
 package com.example.demo.Model;
 
+
 import jakarta.persistence.*;
 
-@Entity
-@Table(name = "NhanVien2")
+import java.util.*;
+
+@Entity@Table(name = "NhanVien")
 public class NhanVien {
 
     @Id
-    //@GeneratedValue(strategy = GenerationType.AUTO)
     @SequenceGenerator(
-            name = "NhanVien_sequence",
-            sequenceName = "NhanVien_sequence",
+            name = "NhanVien_seq",
+            sequenceName = "NhanVien_seq",
             allocationSize = 1
     )
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
-            generator = "NhanVien_sequence"
+            generator = "NhanVien_seq"
     )
     private long id;
-    @Column
+
     private String name;
+
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "congTyId")
+    private CongTy congTy;
+
 
     public NhanVien() {
     }
 
     public NhanVien(String users) {
         this.name = name;
+    }
+
+    public NhanVien(String name, CongTy congTy) {
+        this.name = name;
+        this.congTy = congTy;
     }
 
     public long getId() {
@@ -44,11 +56,20 @@ public class NhanVien {
         this.name = name;
     }
 
+    public CongTy getCongTy() {
+        return congTy;
+    }
+
+    public void setCongTy(CongTy congTy) {
+        this.congTy = congTy;
+    }
+
     @Override
     public String toString() {
         return "NhanVien{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", congTy=" + congTy +
                 '}';
     }
 }
