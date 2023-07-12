@@ -1,10 +1,8 @@
 package com.example.demo.Controller;
 
 import com.example.demo.Model.CongTy;
-import com.example.demo.Model.NhanVien;
 import com.example.demo.Model.ResponseObject;
 import com.example.demo.Repositories.CongTyRepository;
-import com.example.demo.Repositories.NhanVienRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

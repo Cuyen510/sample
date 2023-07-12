@@ -24,10 +24,7 @@ public class NhanVienController {
         return nhanVienRepo.findAll();
     }
 
-    //    @GetMapping("/{id}")
-//    NhanVien findById(@PathVariable long id) {
-//            return nhanVienRepo.findById(id).
-//                    orElseThrow(() -> new RuntimeException("Can not find NhanVien with id =" + id));
+
     @GetMapping("/{id}")
     ResponseEntity<ResponseObject> findById(@PathVariable Long id){
         Optional<NhanVien> foundNhanVien = nhanVienRepo.findById(id);
