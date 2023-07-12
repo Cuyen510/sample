@@ -28,7 +28,7 @@ public class CongTyController {
         Optional<CongTy> foundCongTy = congTyRepository.findById(id);
         if(foundCongTy.isPresent()){
             return ResponseEntity.status(HttpStatus.OK).body(
-                    new ResponseObject("ok","Query successful")
+                    new ResponseObject("ok","Query successful",foundCongTy.get().getTenCongTy())
             );
         }else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(

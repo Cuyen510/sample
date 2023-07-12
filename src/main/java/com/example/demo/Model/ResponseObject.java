@@ -3,7 +3,7 @@ package com.example.demo.Model;
 public class ResponseObject {
     private String status;
     private String message;
-
+    private String data;
 
     public ResponseObject() {}
 
@@ -11,6 +11,20 @@ public class ResponseObject {
         this.status = status;
         this.message = message;
 
+    }
+
+    public ResponseObject(String status, String message, String data) {
+        this.status = status;
+        this.message = message;
+        this.data = data;
+    }
+
+    public String getData() {
+        return data;
+    }
+
+    public void setData(String data) {
+        this.data = data;
     }
 
     public String getStatus() {

@@ -30,7 +30,7 @@ public class NhanVienController {
         Optional<NhanVien> foundNhanVien = nhanVienRepo.findById(id);
         if(foundNhanVien.isPresent()){
             return ResponseEntity.status(HttpStatus.OK).body(
-                    new ResponseObject("ok","Query successful")
+                    new ResponseObject("ok","Query successful", foundNhanVien.get().getName())
             );
         }else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
