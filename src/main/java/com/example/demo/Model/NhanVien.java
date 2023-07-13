@@ -23,7 +23,7 @@ public class NhanVien {
     private String name;
 
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne()
     @JoinColumn(name = "congTyId")
     private CongTy congTy;
 

@@ -21,7 +21,7 @@ public class CongTy {
     )
     private long congTyId;
 
-    @OneToMany(fetch = FetchType.LAZY,mappedBy = "congTy")
+    @OneToMany(mappedBy = "congTy")
     private List<NhanVien> nhanVien = new ArrayList<NhanVien>();
 
 
