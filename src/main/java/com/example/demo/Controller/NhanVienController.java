@@ -46,7 +46,7 @@ public class NhanVienController {
     ResponseEntity<ResponseObject> insertNhanVien(@RequestBody NhanVien newNhanVien){
         nhanVienRepo.save(newNhanVien);
         return ResponseEntity.status(HttpStatus.OK).body(
-                new ResponseObject("ok","Insert successfully")
+                new ResponseObject("ok","Insert successfully", newNhanVien.getName())
         );
     }
 
@@ -63,7 +63,7 @@ public class NhanVienController {
             return nhanVienRepo.save(newNhanVien);
         });
         return ResponseEntity.status(HttpStatus.OK).body(
-                new ResponseObject("ok","Update successfully")
+                new ResponseObject("ok","Update successfully", newNhanVien.getName())
         );
     }
 
