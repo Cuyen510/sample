@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/v1/login")
 @RequiredArgsConstructor
-public class loginController {
+public class LoginController {
 
     @Autowired
     private AuthenticationManager authenticationManager;
