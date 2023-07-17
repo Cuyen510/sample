@@ -3,9 +3,15 @@ package com.example.demo.Model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
 @Table(name = "NhanVien")
 public class NhanVien {
 
@@ -30,48 +36,5 @@ public class NhanVien {
     private CongTy congTy;
 
 
-    public NhanVien() {
-    }
 
-    public NhanVien(String users) {
-        this.name = name;
-    }
-
-    public NhanVien(String name, CongTy congTy) {
-        this.name = name;
-        this.congTy = congTy;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return  name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public CongTy getCongTy() {
-        return congTy;
-    }
-
-    public void setCongTy(CongTy congTy) {
-        this.congTy = congTy;
-    }
-
-    @Override
-    public String toString() {
-        return "NhanVien{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", congTy=" + congTy +
-                '}';
-    }
 }
