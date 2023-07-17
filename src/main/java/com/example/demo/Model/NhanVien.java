@@ -31,7 +31,7 @@ public class NhanVien {
     private String name;
 
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn (name = "congTyId")
     private CongTy congTy;
 

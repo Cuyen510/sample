@@ -1,6 +1,7 @@
 package com.example.demo.Controller;
 
 import com.example.demo.Model.CongTy;
+import com.example.demo.Model.NhanVien;
 import com.example.demo.Model.ResponseObject;
 import com.example.demo.Repositories.CongTyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,7 @@ public class CongTyController {
 
 
     @GetMapping("/{id}")
-    ResponseEntity<ResponseObject> findById(@PathVariable Long id){
+    ResponseEntity<ResponseObject> findById(@PathVariable long id){
         Optional<CongTy> foundCongTy = congTyRepository.findById(id);
         if(foundCongTy.isPresent()){
             return ResponseEntity.status(HttpStatus.OK).body(
@@ -50,23 +51,34 @@ public class CongTyController {
 
     //Update
     @PutMapping("/{id}")
-    ResponseEntity<ResponseObject> updateCongTy(@RequestBody CongTy newCongTy,@PathVariable Long id){
-        CongTy updateCongTy = congTyRepository.findById(id).map(
-                congTy -> {
-                    congTy.setTenCongTy(newCongTy.getTenCongTy());
-                    congTy.setNhanVien(newCongTy.getNhanVien());
-                    return congTyRepository.save(newCongTy);
-                }).orElseGet(()-> {
-            newCongTy.setId(id);
-            return congTyRepository.save(newCongTy);
-        });
+    ResponseEntity<ResponseObject> updateCongTy(@RequestBody CongTy congTy, @PathVariable long id) {
+
+        congTy = congTyRepository.findById(id).get();
+
+        congTy.setTenCongTy(congTy.getTenCongTy());
+
+        congTyRepository.save(congTy);
         return ResponseEntity.status(HttpStatus.OK).body(
-                new ResponseObject("ok","Update successfully")
-        );
+                new ResponseObject("ok","Update successfully"));
+
     }
+//        CongTy updateCongTy = congTyRepository.findById(id).map(
+//                congTy -> {
+//                    congTy.setTenCongTy(newCongTy.getTenCongTy());
+//                    congTy.setNhanVien(newCongTy.getNhanVien());
+//                    return congTyRepository.save(newCongTy);
+//                }).orElseGet(()-> {
+//            newCongTy.setCongTyId(id);
+//            return congTyRepository.save(newCongTy);
+//        });
+//        return ResponseEntity.status(HttpStatus.OK).body(
+//                new ResponseObject("ok","Update successfully")
+//        );
+
+
 
     @DeleteMapping("/{id}")
-    ResponseEntity<ResponseObject> deleteCongTy(@PathVariable Long id){
+    ResponseEntity<ResponseObject> deleteCongTy(@PathVariable long id){
         boolean exists = congTyRepository.existsById(id);
         if(exists){
             congTyRepository.deleteById(id);

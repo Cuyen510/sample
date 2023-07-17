@@ -1,7 +1,9 @@
 package com.example.demo.Controller;
 
+import com.example.demo.Model.CongTy;
 import com.example.demo.Model.NhanVien;
 import com.example.demo.Model.ResponseObject;
+import com.example.demo.Repositories.CongTyRepository;
 import com.example.demo.Repositories.NhanVienRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,6 +20,9 @@ public class NhanVienController {
     @Autowired
     private NhanVienRepo nhanVienRepo;
 
+    @Autowired
+    private CongTyRepository congTyRepository;
+
 
     @GetMapping("")
     List<NhanVien> getNhanVien(){
@@ -26,7 +31,7 @@ public class NhanVienController {
 
 
     @GetMapping("/{id}")
-    ResponseEntity<ResponseObject> findById(@PathVariable Long id){
+    ResponseEntity<ResponseObject> findById(@PathVariable long id){
         Optional<NhanVien> foundNhanVien = nhanVienRepo.findById(id);
         if(foundNhanVien.isPresent()){
             return ResponseEntity.status(HttpStatus.OK).body(
@@ -52,23 +57,23 @@ public class NhanVienController {
 
     //Update
     @PutMapping("/{id}")
-    ResponseEntity<ResponseObject> updateNhanVien(@RequestBody NhanVien newNhanVien,@PathVariable Long id){
-        NhanVien updateNhanVien = nhanVienRepo.findById(id).map(
-                nhanVien -> {
-                    nhanVien.setName(newNhanVien.getName());
-                    nhanVien.setCongTy(newNhanVien.getCongTy());
-                    return nhanVienRepo.save(nhanVien);
-                }).orElseGet(()-> {
-            newNhanVien.setId(id);
-            return nhanVienRepo.save(newNhanVien);
-        });
+    ResponseEntity<ResponseObject> updateCongTy(@RequestBody NhanVien nhanVien, @PathVariable long id) {
+        CongTy congTy = congTyRepository.findById(nhanVien.getCongTy().getCongTyId()).get();
+
+        nhanVien = nhanVienRepo.findById(id).get();
+        System.out.println(nhanVien.getId() + "  " + id);
+        nhanVien.setName(nhanVien.getName());
+
+        nhanVien.setCongTy(congTy);
+        nhanVienRepo.save(nhanVien);
         return ResponseEntity.status(HttpStatus.OK).body(
-                new ResponseObject("ok","Update successfully", newNhanVien.getName())
-        );
+                new ResponseObject("ok","Update successfully"));
+
     }
 
+
     @DeleteMapping("/{id}")
-    ResponseEntity<ResponseObject> updateNhanVien(@PathVariable Long id){
+    ResponseEntity<ResponseObject> updateNhanVien(@PathVariable long id){
         boolean exists = nhanVienRepo.existsById(id);
         if(exists){
             nhanVienRepo.deleteById(id);
