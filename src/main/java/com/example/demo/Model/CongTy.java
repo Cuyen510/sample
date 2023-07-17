@@ -2,6 +2,7 @@ package com.example.demo.Model;
 
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 
 import java.util.*;
 
@@ -21,10 +22,11 @@ public class CongTy {
     )
     private long congTyId;
 
-    @OneToMany(mappedBy = "congTy")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "congTy")
     private List<NhanVien> nhanVien = new ArrayList<NhanVien>();
 
 
+    @NotBlank(message = "Ten Cong Ty null")
     private String tenCongTy;
 
     public CongTy() {

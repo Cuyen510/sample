@@ -2,10 +2,11 @@ package com.example.demo.Model;
 
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 
 
-
-@Entity@Table(name = "NhanVien")
+@Entity
+@Table(name = "NhanVien")
 public class NhanVien {
 
     @Id
@@ -20,11 +21,12 @@ public class NhanVien {
     )
     private long id;
 
+    @NotBlank(message = "Ten nhan vien null")
     private String name;
 
 
-    @ManyToOne()
-    @JoinColumn(name = "congTyId")
+    @ManyToOne
+    @JoinColumn (name = "congTyId")
     private CongTy congTy;
 
 
